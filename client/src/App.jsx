@@ -4,6 +4,7 @@ function App() {
   return (
     <>
       <Header />
+      <p>hii</p>
     </>
   )
 }
