@@ -34,7 +34,7 @@ const products = [
     brand: 'Canon',
     category: 'Electronics',
     price: 1199.99,
-    countInStock: 5,
+    countInStock: 0,
     rating: 4.9,
     numReviews: 24,
   },

@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className='py-4'>
+      <nav className='md:px-4 py-2'>
         <div className='flex flex-col md:flex-row justify-between items-center mx-4 lg:mx-16'>
           <div className='flex md:block w-full md:w-auto justify-between'>
             <Link to='/'>
