@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
@@ -16,9 +17,12 @@ export default function Header() {
       <nav className='py-4'>
         <div className='flex flex-col md:flex-row justify-between items-center mx-4 lg:mx-16'>
           <div className='flex md:block w-full md:w-auto justify-between'>
-            <div className='text-2xl font-bold tracking-wider mb-8 md:mb-0'>
-              BuyInCart
-            </div>
+            <Link to='/'>
+              <div className='text-2xl font-bold tracking-wider mb-8 md:mb-0'>
+                BuyInCart
+              </div>
+            </Link>
+
             <div className='md:hidden cursor-pointer mt-2 text-xl'>
               {isClose ? (
                 <RxHamburgerMenu onClick={() => setIsClose(!isClose)} />
@@ -49,18 +53,26 @@ export default function Header() {
             } `}
           >
             <ul className='flex justify-around space-x-12 lg:space-x-8'>
-              <li className='flex items-center flex-col'>
-                <AiOutlineHeart className='text-xl' />
-                <span className='text-sm'>Favourite</span>
-              </li>
-              <li className='flex items-center flex-col'>
-                <AiOutlineShoppingCart className='text-xl' />
-                <span className='text-sm'>Cart</span>
-              </li>
-              <li className='flex items-center flex-col'>
-                <AiOutlineUser className='text-xl' />
-                <span className='text-sm'>Sign in</span>
-              </li>
+              <Link to='/favourites'>
+                <li className='flex items-center flex-col'>
+                  <AiOutlineHeart className='text-xl' />
+                  <span className='text-sm'>Favourite</span>
+                </li>
+              </Link>
+
+              <Link to='/cart'>
+                <li className='flex items-center flex-col'>
+                  <AiOutlineShoppingCart className='text-xl' />
+                  <span className='text-sm'>Cart</span>
+                </li>
+              </Link>
+
+              <Link to='signin'>
+                <li className='flex items-center flex-col'>
+                  <AiOutlineUser className='text-xl' />
+                  <span className='text-sm'>Sign in</span>
+                </li>
+              </Link>
             </ul>
           </div>
         </div>
