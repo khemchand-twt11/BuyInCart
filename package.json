@@ -1,0 +1,36 @@
+{
+  "name": "buyincart",
+  "version": "1.0.0",
+  "description": "BuyInCart is an ecommerce website built on MERN stack",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "server": "nodemon backend/index.js",
+    "client": "npm run dev --prefix client",
+    "watch": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder.js -i",
+    "data:delete": "node backend/seeder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khemchand-twt11/BuyInCart.git"
+  },
+  "author": "Khemchand Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khemchand-twt11/BuyInCart/issues"
+  },
+  "homepage": "https://github.com/khemchand-twt11/BuyInCart#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1"
+  }
+}

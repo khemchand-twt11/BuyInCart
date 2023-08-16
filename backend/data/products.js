@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: 1,
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: 2,
     name: 'Amazon Echo Smart Speaker (Alexa)',
     image: '/images/alexa.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 18,
   },
   {
-    _id: 3,
     name: 'Canon EOS 90D DSLR Camera',
     image: '/images/camera.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 24,
   },
   {
-    _id: 4,
     name: 'Logitech Wireless Mouse',
     image: '/images/mouse.jpg',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 9,
   },
   {
-    _id: 5,
     name: 'Samsung Galaxy S21 Ultra',
     image: '/images/phone.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 16,
   },
   {
-    _id: 6,
     name: 'PlayStation 5 (PS5) Console',
     image: '/images/playstation.jpg',
     description:

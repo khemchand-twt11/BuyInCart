@@ -1,10 +1,19 @@
 import { useParams, Link } from 'react-router-dom'
-import products from '../products'
+import axios from 'axios'
 import Rating from '../components/Rating'
+import { useEffect, useState } from 'react'
+
 export default function SingleProductScreen() {
+  const [product, setProduct] = useState({})
   const { id } = useParams()
-  const product = products.find((item) => item._id == id)
-  console.log(product)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/singleproduct/${id}`)
+      setProduct(data)
+    }
+    fetchProduct()
+  }, [])
   return (
     <div className='w-10/12  mx-auto mt-10'>
       <Link to='/' className='bg-gray-200 px-3 py-2 rounded-sm'>
