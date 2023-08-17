@@ -1,22 +1,20 @@
 import express from 'express'
-import products from './data/products.js'
 import connectDB from './config/db.js'
-// console.log(products)
-const app = express()
+import productRouter from './routes/product.route.js'
+import {
+  errorHandler,
+  notFound,
+} from './middlewares/errorHandler.middleware.js'
 connectDB()
+const app = express()
+
 const PORT = 8080
 app.get('/', (req, res) => {
   res.send('Server is Working...')
 })
-app.get('/api/products', (req, res) => {
-  res.send(products)
-})
-
-app.get('/api/singleproduct/:id', (req, res) => {
-  const { id } = req.params
-  const product = products.find((item) => item._id == id)
-  res.send(product)
-})
+app.use('/api/products', productRouter)
+app.use(notFound)
+app.use(errorHandler)
 app.listen(PORT, () => {
   console.log(`server is running on port 8080`)
 })
