@@ -19,6 +19,7 @@ export default function SingleProductScreen() {
   const cartHandler = () => {
     const ifItemExists = cartItems.find((item) => item._id === product._id)
     if (ifItemExists) {
+      alert('Product already in cart')
       console.log('Product already in cart')
     } else {
       dispatch(addToCart({ ...product, qty: 1 }))
