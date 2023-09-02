@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen.jsx'
+import CartScreen from './screens/CartScreen.jsx'
 import SingleProductScreen from './screens/SingleProductScreen.jsx'
 import { Provider } from 'react-redux'
 import store from './store.js'
@@ -16,7 +17,11 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomeScreen />} />
-      <Route path='/singleproduct/:id' element={<SingleProductScreen />} />
+      <Route
+        path='/singleproduct/:productId'
+        element={<SingleProductScreen />}
+      />
+      <Route path='/cart' element={<CartScreen />} />
     </Route>
   )
 )

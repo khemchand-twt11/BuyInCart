@@ -1,12 +1,13 @@
+import Loader from '../components/Loader'
 import ProductCard from '../components/ProductCard'
 import { useGetProductsQuery } from '../slice/productApiSlice'
 export default function HomeScreen() {
   const { data: products, isLoading, isError } = useGetProductsQuery()
 
   return (
-    <>
+    <div className='min-h-screen'>
       {isLoading ? (
-        <h2>Loading.....</h2>
+        <Loader />
       ) : isError ? (
         <div>{isError?.data?.message || isError?.error}</div>
       ) : (
@@ -16,6 +17,6 @@ export default function HomeScreen() {
           ))}
         </div>
       )}
-    </>
+    </div>
   )
 }

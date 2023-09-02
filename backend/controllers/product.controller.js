@@ -15,8 +15,8 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access: public
 
 const getProductById = asyncHandler(async (req, res) => {
-  const { id } = req.params
-  const product = await ProductModel.findById(id)
+  const { productId } = req.params
+  const product = await ProductModel.findById(productId)
   if (product) {
     return res.json(product)
   } else {

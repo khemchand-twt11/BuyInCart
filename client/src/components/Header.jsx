@@ -5,16 +5,17 @@ import {
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from 'react-icons/ai'
-
+import { useSelector } from 'react-redux'
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx'
 
 import { BiSearch } from 'react-icons/bi'
 export default function Header() {
   const [isClose, setIsClose] = useState(true)
-
+  const { cartItems } = useSelector((state) => state.cart)
+  // console.log(cartItems)
   return (
     <>
-      <nav className='md:px-4 py-2'>
+      <nav className='md:px-4 py-4'>
         <div className='flex flex-col md:flex-row justify-between items-center mx-4 lg:mx-16'>
           <div className='flex md:block w-full md:w-auto justify-between'>
             <Link to='/'>
@@ -61,7 +62,15 @@ export default function Header() {
               </Link>
 
               <Link to='/cart'>
-                <li className='flex items-center flex-col'>
+                <li className='flex items-center flex-col relative'>
+                  {cartItems.length > 0 && (
+                    <div className='t-0 absolute left-4 -top-3'>
+                      <p className='flex h-2 w-2 items-center justify-center rounded-full bg-black p-3 text-xs text-white font-medium'>
+                        {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                      </p>
+                    </div>
+                  )}
+
                   <AiOutlineShoppingCart className='text-xl' />
                   <span className='text-sm'>Cart</span>
                 </li>
