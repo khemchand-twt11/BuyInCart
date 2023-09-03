@@ -117,8 +117,7 @@ export default function SingleProductScreen() {
                     <button
                       className='w-full bg-gray-700 flex justify-center gap-2 items-center text-white px-6 py-2  rounded-md font-sans'
                       disabled={
-                        product.countInStock === 0 ||
-                        qty >= product.countInStock
+                        product.countInStock === 0 || qty > product.countInStock
                       }
                       onClick={cartHandler}
                     >

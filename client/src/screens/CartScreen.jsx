@@ -2,12 +2,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import cartImage from '../emptyCart.jpg'
 import { FaArrowLeftLong, FaTrash } from 'react-icons/fa6'
-import { BsArrowLeft } from 'react-icons/bs'
-import { addToCart } from '../slice/cartSlice'
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import { addToCart, removeFromCart } from '../slice/cartSlice'
 export default function CartScreen() {
+  const navigate = useNavigate()
   const cart = useSelector((state) => state.cart)
-  const { cartItems, itemsPrice } = cart
+  const { cartItems, itemsPrice, shippingPrice, totalPrice } = cart
+  const dispatch = useDispatch()
+  //functions
 
+  const checkoutHandler = () => {
+    navigate('/login?redirect=/shipping')
+  }
   return (
     <div
       className={`min-h-[70vh] w-full mb-52 ${
@@ -45,7 +51,7 @@ export default function CartScreen() {
               Shopping Cart
             </h1>
             <div className='grid grid-cols-12 gap-10'>
-              <div className=' w-full  col-span-9 rounded-lg'>
+              <div className=' w-full  col-span-8 rounded-lg'>
                 <div className='space-y-6'>
                   {cartItems.map((item) => (
                     <div
@@ -71,7 +77,9 @@ export default function CartScreen() {
                       <div className='flex gap-2 items-center col-span-3'>
                         {/* Minus Button */}
                         <button
-                          onClick={() => {}}
+                          onClick={() =>
+                            dispatch(addToCart({ ...item, qty: item.qty - 1 }))
+                          }
                           className=' border-2 shadow-sm px-4 py-1 rounded-md text-lg font-sans font-medium'
                           disabled={item.qty <= 1}
                         >
@@ -88,7 +96,9 @@ export default function CartScreen() {
                         />
                         {/* Plus Button */}
                         <button
-                          onClick={() => {}}
+                          onClick={() =>
+                            dispatch(addToCart({ ...item, qty: item.qty + 1 }))
+                          }
                           className=' border-2 shadow-sm px-4 py-1 rounded-md text-lg font-sans font-medium'
                           disabled={item.qty >= item.countInStock}
                         >
@@ -103,7 +113,9 @@ export default function CartScreen() {
                       </div>
 
                       <div className='col-span-1'>
-                        <button>
+                        <button
+                          onClick={() => dispatch(removeFromCart(item._id))}
+                        >
                           <FaTrash />
                         </button>
                       </div>
@@ -112,12 +124,41 @@ export default function CartScreen() {
                 </div>
               </div>
 
-              <div className='col-span-3 rounded-xl shadow-md  p-4 h-1/2'>
-                <h1 className='text-xl text-gray-600'>
-                  subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}
-                  ) items
-                </h1>
-                <p>{itemsPrice}</p>
+              <div className='col-span-4 rounded-xl shadow-md h-56 p-4 space-y-4'>
+                <div className='flex justify-between items-center'>
+                  <h1 className=' text-gray-600 font-bold'>
+                    subtotal (
+                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
+                  </h1>
+                  <p className='font-medium text-gray-700'>
+                    Rs {itemsPrice.toFixed(2)}
+                  </p>
+                </div>
+                <div className='flex justify-between items-center'>
+                  <h1 className=' text-gray-600 font-bold'>shipping charges</h1>
+                  <p className='font-medium text-gray-700'>
+                    Rs {shippingPrice.toFixed(2)}
+                  </p>
+                </div>
+                <div className='flex justify-between items-center'>
+                  <h1 className=' text-gray-600 font-bold'>Total(TAX incl.)</h1>
+                  <p className='font-medium text-gray-700'>
+                    Rs {totalPrice.toFixed(2)}
+                  </p>
+                </div>
+                <div>
+                  <button
+                    className='flex mt-10 justify-between w-full px-4 rounded-lg py-2 bg-blue-950 text-white'
+                    disabled={cartItems.length === 0}
+                    onClick={checkoutHandler}
+                  >
+                    <span className='font-medium'>Rs {totalPrice}</span>
+                    <span className='flex space-x-3 items-center font-medium'>
+                      <span>Checkout</span>
+                      <BsArrowRight className='text-2xl' />
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
