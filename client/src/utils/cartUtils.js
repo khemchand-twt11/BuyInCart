@@ -6,7 +6,7 @@ export const updateCart = (state) => {
   )
 
   //calcualte shipping chages
-  state.shippingPrice = state.itemsPrice > 599 ? 0 : 40
+  state.shippingPrice = state.itemsPrice > 599 ? 0 : 70
 
   //calculate tax charges
   state.taxPrice = Number((0.15 * state.itemsPrice).toFixed(2))
