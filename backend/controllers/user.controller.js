@@ -6,9 +6,9 @@ import UserModel from '../models/user.model.js'
 // @access: public
 
 const loginUser = asyncHandler(async (req, res) => {
-  const { name, email } = req.body
+  const { email, password } = req.body
   const user = await UserModel.findOne({ email })
-  if (user) {
+  if (user && (await user.checkPassword(password))) {
     res.json({
       _id: user._id,
       email: user.email,
