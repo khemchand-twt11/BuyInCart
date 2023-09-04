@@ -18,7 +18,7 @@ const errorHandler = (err, req, res, next) => {
   }
 
   res.status(statusCode).json({
-    err: message,
+    message,
     stack: err.stack,
   })
 }
