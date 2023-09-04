@@ -11,6 +11,7 @@ export default function RegisterScreen() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -18,17 +19,27 @@ export default function RegisterScreen() {
   const { search } = useLocation()
   const sp = new URLSearchParams(search)
   const redirect = sp.get('redirect') || '/'
-  // console.log(redirect)
 
   const submitHandler = async (e) => {
     e.preventDefault()
+
+    // Check if password and confirm password match
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match ! ', {
+        position: toast.POSITION.TOP_CENTER,
+      })
+      return
+    }
+
     try {
       const res = await register({ name, email, password }).unwrap()
       dispatch(setCredentials({ ...res }))
       navigate(redirect)
     } catch (err) {
       console.log('err', err)
-      toast.error(err?.data?.message || err.error)
+      toast.error(err?.data?.message || err.error, {
+        position: toast.POSITION.TOP_CENTER,
+      })
     }
   }
 
@@ -38,7 +49,6 @@ export default function RegisterScreen() {
         <h1 className='text-2xl text-center font-semibold mb-10'>Sign Up</h1>
         <form onSubmit={submitHandler}>
           <div className='my-2'>
-            {/* <label className='block mb-2'>Name</label> */}
             <input
               type='text'
               placeholder='Enter name'
@@ -48,7 +58,6 @@ export default function RegisterScreen() {
             />
           </div>
           <div className='my-2'>
-            {/* <label className='block mb-2'>Email Address</label> */}
             <input
               type='email'
               placeholder='Enter email'
@@ -58,12 +67,20 @@ export default function RegisterScreen() {
             />
           </div>
           <div className='my-2'>
-            {/* <label className='block mb-2'>Password</label> */}
             <input
               type='password'
               placeholder='Enter password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className='w-full px-4 py-2 border-2 rounded-md focus:outline-none '
+            />
+          </div>
+          <div className='my-2'>
+            <input
+              type='password'
+              placeholder='Confirm password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className='w-full px-4 py-2 border-2 rounded-md focus:outline-none '
             />
           </div>
