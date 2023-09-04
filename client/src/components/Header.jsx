@@ -76,7 +76,7 @@ export default function Header() {
                 </li>
               </Link>
 
-              <Link to='signin'>
+              <Link to='login'>
                 <li className='flex items-center flex-col'>
                   <AiOutlineUser className='text-xl' />
                   <span className='text-sm'>Sign in</span>

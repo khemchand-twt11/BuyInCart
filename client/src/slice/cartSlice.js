@@ -4,6 +4,8 @@ import { updateCart } from '../utils/cartUtils'
 const initialState = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
   : { cartItems: [] }
+
+// Cart Slice
 const cartSlice = createSlice({
   name: 'cart',
   initialState,

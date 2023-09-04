@@ -6,10 +6,12 @@ import {
   notFound,
 } from './middlewares/errorHandler.middleware.js'
 import userRouter from './routes/user.route.js'
+import cookieParser from 'cookie-parser'
 connectDB()
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 const PORT = 8080
 app.get('/', (req, res) => {

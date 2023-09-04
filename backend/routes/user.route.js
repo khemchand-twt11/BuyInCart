@@ -10,12 +10,20 @@ import {
   updateUser,
   deleteUser,
 } from '../controllers/user.controller.js'
+import { protect, admin } from '../middlewares/auth.middleware.js'
 const userRouter = express.Router()
 
-userRouter.route('/').post(registerUser).get(getUsers)
+userRouter.route('/').post(registerUser).get(protect, admin, getUsers)
 userRouter.post('/login', loginUser)
-userRouter.post('/logout', logoutUser)
-userRouter.route('/profile').get(getUserProfile).put(updateUserProfile)
-userRouter.route('/:id').get(getUserById).put(updateUser).delete(deleteUser)
+userRouter.post('/logout', protect, logoutUser)
+userRouter
+  .route('/profile')
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile)
+userRouter
+  .route('/:id')
+  .get(protect, admin, getUserById)
+  .put(protect, admin, updateUser)
+  .delete(protect, admin, deleteUser)
 
 export default userRouter

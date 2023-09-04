@@ -1,6 +1,7 @@
 import asyncHandler from '../middlewares/asyncHandler.middleware.js'
 import UserModel from '../models/user.model.js'
-
+import jwt from 'jsonwebtoken'
+import generateToken from '../utils/generateToken.js'
 // @desc : login user
 // @request: POST api/users/login
 // @access: public
@@ -9,7 +10,9 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
   const user = await UserModel.findOne({ email })
   if (user && (await user.checkPassword(password))) {
-    res.json({
+    generateToken(res, user._id)
+
+    res.status(200).json({
       _id: user._id,
       email: user.email,
       name: user.name,
@@ -28,7 +31,32 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access: public
 
 const registerUser = asyncHandler(async (req, res) => {
-  res.send('register user')
+  const { name, email, password } = req.body
+  const ifUserExists = await UserModel.findOne({ email })
+
+  if (ifUserExists) {
+    res.status(400)
+    throw new Error('User Already Exists')
+  }
+
+  const user = await UserModel.create({
+    name,
+    email,
+    password,
+  })
+
+  if (user) {
+    generateToken(res, user._id)
+    res.status(201).json({
+      id: user._id,
+      name,
+      email,
+      admin: user.isAdmin,
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid User Data')
+  }
 })
 
 // @desc : logout user / clear cookie
@@ -36,7 +64,11 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access: private
 
 const logoutUser = asyncHandler(async (req, res) => {
-  res.send('logout user')
+  res.clearCookie('jwt', {
+    httpOnly: true,
+    expires: new Date(0),
+  })
+  res.status(200).json({ message: 'Logged out successfully! ' })
 })
 
 // @desc : Get user profile
@@ -44,7 +76,18 @@ const logoutUser = asyncHandler(async (req, res) => {
 // @access: private
 
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.send('get user profile')
+  const user = await UserModel.findById(req.user._id)
+  if (user) {
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      admin: user.isAdmin,
+    })
+  } else {
+    res.status(404)
+    throw new Error('User Not Found')
+  }
 })
 
 // @desc : Get user profile =
@@ -52,7 +95,26 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access: private
 
 const updateUserProfile = asyncHandler(async (req, res) => {
-  res.send('update user profile')
+  const user = await UserModel.findById(req.user._id)
+  if (user) {
+    user.email = req.body.email || user.email
+    user.name = req.body.name || user.name
+    // console.log(name)
+    if (req.body.password) {
+      user.password = req.body.password
+    }
+    const updatedUser = await user.save()
+    console.log(updatedUser)
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      passowrd: updatedUser.password,
+    })
+  } else {
+    res.status(404)
+    throw new Error('User Not Found')
+  }
 })
 
 // FOR ADMIN
