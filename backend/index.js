@@ -7,6 +7,7 @@ import {
 } from './middlewares/errorHandler.middleware.js'
 import userRouter from './routes/user.route.js'
 import cookieParser from 'cookie-parser'
+import orderRouter from './routes/order.route.js'
 connectDB()
 const app = express()
 app.use(express.json())
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 })
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
+app.use('/api/orders', orderRouter)
 app.use(notFound)
 app.use(errorHandler)
 app.listen(PORT, () => {
