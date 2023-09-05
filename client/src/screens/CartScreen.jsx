@@ -7,7 +7,7 @@ import { addToCart, removeFromCart } from '../slice/cartSlice'
 export default function CartScreen() {
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart)
-  const { cartItems, itemsPrice, shippingPrice, totalPrice } = cart
+  const { cartItems, itemsPrice } = cart
   const dispatch = useDispatch()
   //functions
 
@@ -124,7 +124,7 @@ export default function CartScreen() {
                 </div>
               </div>
 
-              <div className='col-span-4 rounded-xl shadow-md h-56 p-4 space-y-4'>
+              <div className='col-span-4 rounded-xl shadow-md h-40 p-4 space-y-4'>
                 <div className='flex justify-between items-center'>
                   <h1 className=' text-gray-600 font-bold'>
                     subtotal (
@@ -134,25 +134,15 @@ export default function CartScreen() {
                     Rs {itemsPrice.toFixed(2)}
                   </p>
                 </div>
-                <div className='flex justify-between items-center'>
-                  <h1 className=' text-gray-600 font-bold'>shipping charges</h1>
-                  <p className='font-medium text-gray-700'>
-                    Rs {shippingPrice.toFixed(2)}
-                  </p>
-                </div>
-                <div className='flex justify-between items-center'>
-                  <h1 className=' text-gray-600 font-bold'>Total(TAX incl.)</h1>
-                  <p className='font-medium text-gray-700'>
-                    Rs {totalPrice.toFixed(2)}
-                  </p>
-                </div>
                 <div>
                   <button
-                    className='flex mt-10 justify-between w-full px-4 rounded-lg py-2 bg-blue-950 text-white'
+                    className='flex mt-10 justify-between w-full px-4 rounded-lg py-2 bg-gray-700 hover:bg-gray-900 text-white'
                     disabled={cartItems.length === 0}
                     onClick={checkoutHandler}
                   >
-                    <span className='font-medium'>Rs {totalPrice}</span>
+                    <span className='font-medium'>
+                      Rs {itemsPrice.toFixed(2)}
+                    </span>
                     <span className='flex space-x-3 items-center font-medium'>
                       <span>Checkout</span>
                       <BsArrowRight className='text-2xl' />
