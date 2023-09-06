@@ -17,7 +17,6 @@ export default function LoginScreen() {
   const { search } = useLocation()
   const sp = new URLSearchParams(search)
   const redirect = sp.get('redirect') || '/'
-  console.log(redirect)
 
   //USE EFFECT
   useEffect(() => {
@@ -31,11 +30,10 @@ export default function LoginScreen() {
     e.preventDefault()
     try {
       const res = await login({ email, password }).unwrap()
-      console.log(setCredentials)
+
       dispatch(setCredentials({ ...res }))
       navigate(redirect)
     } catch (err) {
-      console.log('err', err)
       toast.error(err?.data?.message || err.error)
     }
   }

@@ -4,7 +4,7 @@ const Message = ({ variant, children }) => {
     primary: 'bg-blue-500 text-white',
     secondary: 'bg-gray-300 text-gray-700',
     success: 'bg-green-500 text-white',
-    danger: 'bg-red-500 text-white',
+    danger: 'bg-red-100 text-red-400',
     warning: 'bg-yellow-500 text-white',
     info: 'bg-blue-400 text-white',
     light: 'bg-gray-100 text-gray-800',

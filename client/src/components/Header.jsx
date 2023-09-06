@@ -22,7 +22,6 @@ export default function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [logoutApiCall] = useLogoutMutation()
-  // console.log(cartItems)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
