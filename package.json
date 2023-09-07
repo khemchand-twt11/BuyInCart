@@ -1,6 +1,8 @@
 {
   "name": "buyincart",
   "version": "1.0.0",
+  "private": true,
+  "proxy": "http://localhost:5173",
   "description": "BuyInCart is an ecommerce website built on MERN stack",
   "type": "module",
   "main": "index.js",
