@@ -3,9 +3,9 @@ import Rating from './Rating'
 
 export default function ProductCard({ product }) {
   return (
-    <div className='shadow-md px-2 w-64 pb-2'>
+    <div className='shadow-md px-2 pb-2'>
       <div>
-        <img src={product.image} alt='products' className='w-60 h-56' />
+        <img src={product.image} alt='products' />
       </div>
       <div>
         <Link to={`/singleproduct/${product._id}`} className='text-sm'>

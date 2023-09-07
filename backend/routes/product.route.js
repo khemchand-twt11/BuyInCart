@@ -16,6 +16,6 @@ productRouter
   .get(getProductById)
   .put(protect, admin, updateProduct)
   .delete(protect, admin, deleteProduct)
-productRouter.route('/:id/review').post(protect, createProductReview)
+productRouter.route('/:id/reviews').post(protect, createProductReview)
 
 export default productRouter

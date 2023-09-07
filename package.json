@@ -10,7 +10,8 @@
     "client": "npm run dev --prefix client",
     "watch": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder.js -i",
-    "data:delete": "node backend/seeder.js"
+    "data:delete": "node backend/seeder.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",

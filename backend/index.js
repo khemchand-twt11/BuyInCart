@@ -17,9 +17,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 const PORT = 8080
-app.get('/', (req, res) => {
-  res.send('Server is Working...')
-})
+// app.get('/', (req, res) => {
+//   res.send('Server is Working...')
+// })
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 app.use('/api/orders', orderRouter)
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve()
   app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
   app.get('/', (req, res) => {
-    res.send('API is running....')
+    res.send('Server is running....')
   })
 }
 app.use(notFound)

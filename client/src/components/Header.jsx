@@ -18,6 +18,7 @@ export default function Header() {
   const [isClose, setIsClose] = useState(true)
   const { cartItems } = useSelector((state) => state.cart)
   const [isOpen, setIsOpen] = useState(false)
+  const [keyword, setKeyword] = useState('')
   const { userInfo } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -33,6 +34,15 @@ export default function Header() {
       navigate('/login')
     } catch (err) {
       console.log(err)
+    }
+  }
+  const submitHandler = (e) => {
+    e.preventDefault()
+    if (keyword.trim()) {
+      setKeyword('')
+      navigate(`/search/${keyword}`)
+    } else {
+      navigate('/')
     }
   }
   return (
@@ -60,15 +70,22 @@ export default function Header() {
               isClose ? 'hidden' : 'block'
             } ${isClose && 'md:flex'}`}
           >
-            <BiSearch className='text-2xl text-gray-500' />
-            <input
-              className='w-full outline-none text-gray-500 pl-2'
-              type='text'
-              placeholder='Search For Products....'
-            />
-            <button className='bg-gray-200 px-4 py-2 rounded-md text-sm hidden lg:block '>
+            <form
+              onSubmit={submitHandler}
+              className=' w-full px-2 lg:py-1 rounded-md flex justify-around space-x-1 items-center md:mb-0'
+            >
+              <BiSearch className='text-2xl text-gray-500' />
+              <input
+                className='w-full outline-none text-gray-500 pl-2 px-2 py-1'
+                type='text'
+                placeholder='Search For Products....'
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+            </form>
+            {/* <button className='bg-gray-200 px-4 py-2 rounded-md text-sm hidden lg:block '>
               Search
-            </button>
+            </button> */}
           </div>
           <div
             className={`space-x-6 ${isClose ? 'hidden' : 'block'} ${

@@ -6,7 +6,15 @@ import ProductModel from '../models/product.model.js'
 // @access: public
 
 const getProducts = asyncHandler(async (req, res) => {
-  const data = await ProductModel.find({})
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i', // Case-insensitive search
+        },
+      }
+    : {}
+  const data = await ProductModel.find({ ...keyword })
   res.json(data)
 })
 
