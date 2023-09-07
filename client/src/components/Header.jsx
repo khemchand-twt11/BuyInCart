@@ -121,6 +121,7 @@ export default function Header() {
                         <Link
                           to='/profile'
                           className='block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                          onClick={() => setIsOpen(!isOpen)}
                         >
                           Profile
                         </Link>
@@ -130,6 +131,31 @@ export default function Header() {
                         >
                           Logout
                         </button>
+                        {userInfo.isAdmin && (
+                          <div>
+                            <Link
+                              to='/admin/orderlist'
+                              className='block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                              onClick={() => setIsOpen(!isOpen)}
+                            >
+                              Orders
+                            </Link>
+                            <Link
+                              to='/admin/productlist'
+                              className='block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                              onClick={() => setIsOpen(!isOpen)}
+                            >
+                              Products
+                            </Link>
+                            <Link
+                              to='/admin/userlist'
+                              className='block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                              onClick={() => setIsOpen(!isOpen)}
+                            >
+                              Users
+                            </Link>
+                          </div>
+                        )}
                       </div>
                     </li>
                   )}

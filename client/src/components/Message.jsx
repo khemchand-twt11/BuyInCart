@@ -3,7 +3,7 @@ const Message = ({ variant, children }) => {
   const tailwindVariantClasses = {
     primary: 'bg-blue-500 text-white',
     secondary: 'bg-gray-300 text-gray-700',
-    success: 'bg-green-500 text-white',
+    success: 'bg-green-100 text-green-500',
     danger: 'bg-red-100 text-red-400',
     warning: 'bg-yellow-500 text-white',
     info: 'bg-blue-400 text-white',

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import cartImage from '../emptyCart.jpg'
+import cartImage from '../assets/emptyCart.jpg'
 import { FaArrowLeftLong, FaTrash } from 'react-icons/fa6'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import { addToCart, removeFromCart } from '../slice/cartSlice'
