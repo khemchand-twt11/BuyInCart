@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import {
   useGetProductsQuery,
-  // useDeleteProductMutation,
+  useDeleteProductMutation,
   useCreateProductMutation,
 } from '../../slice/productApiSlice'
 import { toast } from 'react-toastify'
@@ -20,18 +20,19 @@ const ProductListScreen = () => {
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation()
 
-  // const [deleteProduct, { isLoading: loadingDelete }] =
-  //   useDeleteProductMutation()
+  const [deleteProduct, { isLoading: loadingDelete }] =
+    useDeleteProductMutation()
 
   const deleteHandler = async (id) => {
-    // if (window.confirm('Are you sure')) {
-    //   try {
-    //     await deleteProduct(id)
-    //     refetch()
-    //   } catch (err) {
-    //     toast.error(err?.data?.message || err.error)
-    //   }
-    // }
+    if (window.confirm('Are you sure')) {
+      try {
+        await deleteProduct(id)
+        refetch()
+        toast.success('Product Deleted')
+      } catch (err) {
+        toast.error(err?.data?.message || err.error)
+      }
+    }
   }
 
   const createProductHandler = async () => {
@@ -57,7 +58,7 @@ const ProductListScreen = () => {
         </button>
       </div>
       {loadingCreate && <Loader />}
-      {/* {loadingDelete && <Loader />} */}
+      {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
