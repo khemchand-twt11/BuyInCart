@@ -15,7 +15,7 @@ const ProductEditScreen = () => {
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
-  const [image, setImage] = useState('')
+  let [image, setImage] = useState('')
   const [brand, setBrand] = useState('')
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
@@ -38,7 +38,10 @@ const ProductEditScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
+    console.log(image)
     try {
+      image = image.replace('/client', '')
+
       await updateProduct({
         productId,
         name,
