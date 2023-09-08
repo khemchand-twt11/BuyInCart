@@ -17,9 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 const PORT = 8080
-// app.get('/', (req, res) => {
-//   res.send('Server is Working...')
-// })
+
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 app.use('/api/orders', orderRouter)
@@ -30,20 +28,14 @@ app.get('/api/config/paypal', (req, res) =>
 )
 
 const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/dist')))
-
-  // app.get('/service-worker.js', (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, 'public', 'service-worker.js'))
-  // })
 
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
   )
 } else {
-  //   const __dirname = path.resolve()
-  //   app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
   app.get('/', (req, res) => {
     res.send('Server is running....')
   })

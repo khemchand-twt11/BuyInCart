@@ -40,8 +40,6 @@ const ProductEditScreen = () => {
     e.preventDefault()
     console.log(image)
     try {
-      image = image.replace('/client', '')
-
       await updateProduct({
         productId,
         name,

@@ -90,7 +90,7 @@ const UserEditScreen = () => {
                 <input
                   type='email'
                   id='email'
-                  className='w-full  rounded-md py-1 px-3 outline-none border-2'
+                  className='w-full rounded-md py-1 px-3 outline-none border-2'
                   placeholder='Enter email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

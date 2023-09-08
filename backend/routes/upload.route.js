@@ -1,55 +1,46 @@
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
-
+import cloudinary from 'cloudinary'
+import dotenv from 'dotenv'
+dotenv.config()
 const uploadRouter = express.Router()
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, 'client/uploads/')
-  },
-  filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    )
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: '983568923794615',
+  api_secret: 'ubnSJiNiLfSKrCcY6l_c_tTKGtA',
+})
+const storage = multer.memoryStorage() // Use memory storage for handling the file in memory
+
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5, // Limit file size to 5MB
   },
 })
 
-function fileFilter(req, file, cb) {
-  const filetypes = /jpe?g|png|webp/
-  const mimetypes = /image\/jpe?g|image\/png|image\/webp/
-
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = mimetypes.test(file.mimetype)
-
-  if (extname && mimetype) {
-    cb(null, true)
-  } else {
-    cb(new Error('Images only!'), false)
-  }
-}
-
-const upload = multer({ storage, fileFilter })
-const uploadSingleImage = upload.single('image')
-
-// uploadRouter.post('/', (req, res) => {
-//   uploadSingleImage(req, res, function (err) {
-//     if (err) {
-//       res.status(400).send({ message: err.message })
-//     }
-
-//     res.status(200).send({
-//       message: 'Image uploaded successfully',
-//       image: `/${req.file.path}`,
-//     })
-//   })
-// })
 uploadRouter.post('/', upload.single('image'), (req, res) => {
-  res.send({
-    message: 'Image Uploaded',
-    image: `/${req.file.path}`,
-  })
+  if (!req.file) {
+    return res.status(400).send({ message: 'No image file provided.' })
+  }
+
+  // Upload the image to Cloudinary
+  cloudinary.v2.uploader
+    .upload_stream(
+      { resource_type: 'auto', folder: 'BuyInCart' },
+      (error, result) => {
+        if (error) {
+          return res.status(500).send({ message: 'Image upload failed.' })
+        }
+
+        res.status(200).send({
+          message: 'Image uploaded successfully to Cloudinary',
+          image: result.secure_url,
+        })
+      }
+    )
+    .end(req.file.buffer)
 })
 
 export default uploadRouter
