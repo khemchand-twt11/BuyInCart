@@ -38,9 +38,27 @@ BuyInCart is an electronics ecommerce website for electronic products.
 **Home Page**
 ![Screenshot 1](https://res.cloudinary.com/djfmhnewt/image/upload/v1695220644/BuyInCart/Website%20Images/gfkhbzcfvyhoql1of0tf.png)
 
+**Product Page**
+![Screenshot 2](https://res.cloudinary.com/djfmhnewt/image/upload/v1695221078/BuyInCart/Website%20Images/eope8fptxxisyqifgvur.png)
 
-![Screenshot 2](https://dummy-link.com/screenshot-2.png)
-Caption for Screenshot 2
+**Cart Page**
+![Screenshot 2](https://res.cloudinary.com/djfmhnewt/image/upload/v1695221654/BuyInCart/Website%20Images/c5nhwbfnlyv8fa9lbm57.png)
+
+**Order Page**
+![Screenshot 2](https://res.cloudinary.com/djfmhnewt/image/upload/v1695221661/BuyInCart/Website%20Images/vbtndqpphtnamrdd1xio.png)
+
+**Order Summary Page**
+![Screenshot 2](https://res.cloudinary.com/djfmhnewt/image/upload/v1695221664/BuyInCart/Website%20Images/nblzhocvnr3ogqtls1u1.png)
+
+**Login Page**
+![Screenshot 2](https://res.cloudinary.com/djfmhnewt/image/upload/v1695221666/BuyInCart/Website%20Images/hlmac9tgbj4nmbaiswe1.png)
+
+**Signup Page**
+![Screenshot 2](https://res.cloudinary.com/djfmhnewt/image/upload/v1695221668/BuyInCart/Website%20Images/p61qka7qq9szdajfj8dw.png)
+
+**Profile Page**
+![Screenshot 2](https://res.cloudinary.com/djfmhnewt/image/upload/v1695221672/BuyInCart/Website%20Images/pbryesfhpunlgzu5rppa.png)
+
 
 ## Getting Started
 
