@@ -35,8 +35,9 @@ BuyInCart is an electronics ecommerce website for electronic products.
 
 ## Screenshots
 
+**Home Page**
 ![Screenshot 1](https://res.cloudinary.com/djfmhnewt/image/upload/v1695220644/BuyInCart/Website%20Images/gfkhbzcfvyhoql1of0tf.png)
-Home Page
+
 
 ![Screenshot 2](https://dummy-link.com/screenshot-2.png)
 Caption for Screenshot 2
